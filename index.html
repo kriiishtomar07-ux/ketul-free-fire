@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KETUL | Free Fire MAX</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+min-height:100vh;
+background:radial-gradient(circle at 50% 45%,#332400 0%,#120e08 35%,#050505 70%,#000 100%);
+color:#fff;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden
+}
+
+body::before{
+content:"";
+position:fixed;
+width:500px;
+height:500px;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+background:radial-gradient(circle,rgba(255,185,0,.2),transparent 65%);
+filter:blur(20px);
+pointer-events:none
+}
+
+.hero{
+min-height:100vh;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:50px;
+overflow:hidden;
+border-bottom:2px solid #8f6a17
+}
+
+.brush{
+position:absolute;
+background:linear-gradient(135deg,transparent,rgba(218,165,35,.3),transparent);
+transform:rotate(-25deg);
+pointer-events:none
+}
+
+.brush.one{
+width:600px;
+height:70px;
+left:-150px;
+top:20%
+}
+
+.brush.two{
+width:500px;
+height:60px;
+right:-150px;
+bottom:20%;
+transform:rotate(25deg)
+}
+
+.hero-content{
+width:100%;
+max-width:1200px;
+display:grid;
+grid-template-columns:1fr 1fr;
+align-items:center;
+gap:40px;
+position:relative;
+z-index:2
+}
+
+.photo-area{
+height:650px;
+display:flex;
+justify-content:center;
+align-items:flex-end;
+position:relative
+}
+
+.photo-glow{
+position:absolute;
+width:420px;
+height:500px;
+bottom:30px;
+background:radial-gradient(ellipse,rgba(255,190,30,.45),transparent 70%);
+filter:blur(30px);
+z-index:0
+}
+
+.person{
+height:620px;
+max-width:90%;
+object-fit:contain;
+position:relative;
+z-index:2;
+filter:drop-shadow(0 0 20px rgba(255,190,30,.45));
+-webkit-mask-image:linear-gradient(to bottom,black 88%,transparent 100%);
+mask-image:linear-gradient(to bottom,black 88%,transparent 100%)
+}
+
+.text-area{
+text-align:center;
+padding:30px
+}
+
+.welcome{
+font-size:15px;
+letter-spacing:7px;
+color:#ddd;
+margin-bottom:20px
+}
+
+.name{
+font-size:clamp(60px,8vw,110px);
+line-height:.95;
+font-weight:900;
+letter-spacing:7px;
+color:#e9b72d;
+text-shadow:0 3px 0 #7b5600,0 0 25px rgba(255,190,40,.25)
+}
+
+.bottest{
+margin-top:20px;
+font-size:clamp(25px,4vw,45px);
+font-weight:bold;
+letter-spacing:2px;
+color:#fff
+}
+
+.divider{
+width:130px;
+height:3px;
+margin:30px auto;
+background:#e6b52d;
+box-shadow:0 0 12px rgba(255,190,30,.5)
+}
+
+.of{
+color:#ddd;
+letter-spacing:8px;
+font-size:14px
+}
+
+.game{
+margin-top:15px;
+font-size:clamp(28px,4vw,52px);
+font-weight:900;
+color:#e8b52d;
+font-style:italic;
+text-shadow:0 2px 0 #6d4d00
+}
+
+.details-btn{
+margin-top:45px;
+padding:16px 45px;
+background:transparent;
+border:2px solid #e6b52d;
+color:#f0c33d;
+font-weight:bold;
+letter-spacing:3px;
+font-size:14px;
+cursor:pointer;
+transition:.3s
+}
+
+.details-btn:hover{
+background:#e6b52d;
+color:#000;
+box-shadow:0 0 30px rgba(230,181,45,.45);
+transform:translateY(-3px)
+}
+
+.details-section{
+display:none;
+min-height:100vh;
+padding:70px 20px;
+background:linear-gradient(135deg,#090909,#17130a,#050505);
+border-top:2px solid #8f6a17
+}
+
+.details-section.show{
+display:block
+}
+
+.details-container{
+max-width:1100px;
+margin:auto;
+border:1px solid #8d6919;
+background:rgba(5,5,5,.88);
+padding:35px;
+box-shadow:0 20px 70px #000
+}
+
+.details-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding-bottom:20px;
+border-bottom:1px solid #333;
+margin-bottom:30px
+}
+
+.details-title{
+color:#e8b52d;
+font-size:22px;
+letter-spacing:4px;
+font-weight:bold
+}
+
+.close-btn{
+background:none;
+border:none;
+color:#aaa;
+font-size:32px;
+cursor:pointer
+}
+
+.close-btn:hover{
+color:#fff
+}
+
+.ign{
+padding:25px;
+background:linear-gradient(135deg,#1c1c1c,#0b0b0b);
+border-left:4px solid #e8b52d;
+margin-bottom:30px
+}
+
+.label{
+color:#777;
+font-size:11px;
+letter-spacing:3px;
+margin-bottom:10px
+}
+
+.ign-name{
+font-size:38px;
+font-weight:900;
+letter-spacing:5px;
+color:#e8b52d
+}
+
+.real-name{
+color:#888;
+margin-top:7px;
+font-size:13px;
+letter-spacing:2px
+}
+
+.section-title{
+margin:30px 0 15px;
+color:#e8b52d;
+border-left:3px solid #e8b52d;
+padding-left:10px;
+letter-spacing:3px;
+font-size:13px
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px
+}
+
+.stat{
+padding:20px;
+background:#111;
+border:1px solid #282828;
+transition:.25s
+}
+
+.stat:hover{
+border-color:#b58a20;
+transform:translateY(-2px)
+}
+
+.stat-value{
+font-size:19px;
+font-weight:bold;
+color:#eee
+}
+
+.gold{
+color:#e8b52d
+}
+
+.rank-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px
+}
+
+.rank-box{
+text-align:center;
+background:#111;
+border:1px solid #282828;
+padding:25px 10px
+}
+
+.rank-label{
+color:#777;
+font-size:10px;
+letter-spacing:2px;
+margin-bottom:10px
+}
+
+.rank-value{
+color:#e8b52d;
+font-size:21px;
+font-weight:bold
+}
+
+.weapons{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px
+}
+
+.weapon{
+padding:25px;
+text-align:center;
+background:#111;
+border:1px solid #282828
+}
+
+.weapon-level{
+color:#e8b52d;
+font-size:21px;
+font-weight:bold
+}
+
+.footer{
+margin-top:35px;
+padding-top:20px;
+border-top:1px solid #222;
+text-align:center;
+color:#555;
+font-size:10px;
+letter-spacing:3px
+}
+
+@media(max-width:800px){
+
+.hero{
+padding:30px 15px
+}
+
+.hero-content{
+grid-template-columns:1fr
+}
+
+.photo-area{
+height:480px;
+order:1
+}
+
+.person{
+height:470px
+}
+
+.text-area{
+order:2;
+padding:10px
+}
+
+.name{
+font-size:65px
+}
+
+.stats,
+.rank-grid,
+.weapons{
+grid-template-columns:1fr
+}
+
+.details-container{
+padding:20px
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="brush one"></div>
+<div class="brush two"></div>
+
+<div class="hero-content">
+
+<div class="photo-area">
+<div class="photo-glow"></div>
+
+<img src="ketul.jpg" class="person" alt="Ketul">
+
+</div>
+
+<div class="text-area">
+
+<div class="welcome">
+WELCOME TO THE WORLD OF
+</div>
+
+<div class="name">
+KETUL
+</div>
+
+<div class="bottest">
+is a Bottest Player
+</div>
+
+<div class="divider"></div>
+
+<div class="of">
+OF
+</div>
+
+<div class="game">
+!! FREE FIRE MAX !!
+</div>
+
+<button class="details-btn" onclick="showDetails()">
+MORE DETAILS &nbsp; →
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="details-section" id="details">
+
+<div class="details-container">
+
+<div class="details-header">
+
+<div class="details-title">
+FREE FIRE MAX PROFILE
+</div>
+
+<button class="close-btn" onclick="hideDetails()">
+×
+</button>
+
+</div>
+
+<div class="ign">
+
+<div class="label">
+IN-GAME NAME
+</div>
+
+<div class="ign-name">
+AKS-PAIN
+</div>
+
+<div class="real-name">
+KETUL • FREE FIRE MAX
+</div>
+
+</div>
+
+<div class="section-title">
+PLAYER INFORMATION
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<div class="label">UID</div>
+<div class="stat-value gold">3406666225</div>
+</div>
+
+<div class="stat">
+<div class="label">PLAYER LEVEL</div>
+<div class="stat-value">54</div>
+</div>
+
+<div class="stat">
+<div class="label">LANGUAGE</div>
+<div class="stat-value">English</div>
+</div>
+
+<div class="stat">
+<div class="label">LIKES</div>
+<div class="stat-value">1,100</div>
+</div>
+
+</div>
+
+<div class="section-title">
+CLASH SQUAD
+</div>
+
+<div class="rank-grid">
+
+<div class="rank-box">
+<div class="rank-label">RATING</div>
+<div class="rank-value">538</div>
+</div>
+
+<div class="rank-box">
+<div class="rank-label">RANK</div>
+<div class="rank-value">HEROIC</div>
+</div>
+
+<div class="rank-box">
+<div class="rank-label">SQUAD ROLE</div>
+<div class="rank-value">RUSHER</div>
+</div>
+
+</div>
+
+<div class="stats" style="margin-top:12px">
+
+<div class="stat">
+<div class="label">RUSHER LEVEL</div>
+<div class="stat-value gold">LEVEL 2</div>
+</div>
+
+<div class="stat">
+<div class="label">MOST PLAYED MODE</div>
+<div class="stat-value">CLASH SQUAD</div>
+</div>
+
+</div>
+
+<div class="section-title">
+WEAPON SHOWCASE
+</div>
+
+<div class="weapons">
+
+<div class="weapon">
+<div class="label">WEAPON 01</div>
+<div class="weapon-level">LV. 2</div>
+</div>
+
+<div class="weapon">
+<div class="label">WEAPON 02</div>
+<div class="weapon-level">LV. 2</div>
+</div>
+
+<div class="weapon">
+<div class="label">WEAPON 03</div>
+<div class="weapon-level">LV. 3</div>
+</div>
+
+</div>
+
+<div class="footer">
+KETUL • AKS-PAIN • FREE FIRE MAX
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+function showDetails(){
+
+const d=document.getElementById('details');
+
+d.classList.add('show');
+
+d.scrollIntoView({
+behavior:'smooth'
+});
+
+}
+
+function hideDetails(){
+
+document.getElementById('details').classList.remove('show');
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+}
+
+</script>
+
+</body>
+</html>
